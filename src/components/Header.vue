@@ -4,7 +4,7 @@
     <v-flex>
         <v-card>
             <v-card-title>
-                <h1>{{datenow.getHours()}} : {{datenow.getMinutes()}} : {{datenow.getSeconds()}}</h1>
+                <h1>{{currentTime}}</h1>
             </v-card-title>        
         </v-card>
     </v-flex>
@@ -12,23 +12,25 @@
 </v-container>
 </template>
 <script>
+import moment from 'moment'
 export default {
     name:'Header',
     data(){
         return{
             heading:'Weather',
             datenow: '',
+            moment: moment,
+            currentTime: null
         }
     },
     methods: {
-    time() {
-      var self = this
-      this.datenow = new Date();
-      setInterval(self.time, 1000)
-    },
+    updateCurrentTime() {
+      this.currentTime = moment().format('LTS');
+    }
   },
-  mounted: function() {
-    this.time()
+  created() {
+    this.currentTime = moment().format('LTS');
+    setInterval(() => this.updateCurrentTime(), 1 * 1000);
   }
 }
 </script>
