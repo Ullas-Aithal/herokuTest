@@ -49,5 +49,5 @@
     "not ie <= 8"
   ],
   "postinstall": "npm run build",
-  "start": "node server.js"
+  "start": "node heroku-server.js"
 }
